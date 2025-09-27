@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "967642646799",
+    "project_id": "email-authentication-projects",
+    "storage_bucket": "email-authentication-projects.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:967642646799:android:a03b361b68b6649556167a",
+        "android_client_info": {
+          "package_name": "com.prothes.emailauthwithfirebase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAn0fVFPHzYQWpdzjZ7auEEBprG58Q_qo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
