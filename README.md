@@ -1,16 +1,46 @@
-# emailauthwithfirebase
+# 📧 Email Authentication with Firebase
 
-Email And Password Authentication With Firebase
+A simple **Email & Password Authentication** system for Flutter using **Firebase Authentication**. This project allows users to **register, login, and logout** securely with their email credentials.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 🚀 Features
 
-A few resources to get you started if this is your first Flutter project:
+- ✅ **Email & Password Registration**
+- ✅ **Secure Login**
+- ✅ **Forgot Password Functionality**
+- ✅ **Firebase Integration**
+- ✅ **Real-time Authentication Feedback**
+- ✅ **User-friendly UI**
+- 🌟 **Easily Customizable for Any Flutter Project**
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 📸 Screenshots
+
+<table>
+  <tr>
+    <td><img src="assets/images/img_1.png" width="24%"/></td>
+    <td><img src="assets/images/img.png" width="24%"/></td>
+    <td><img src="screenshots/forgot_password.png" width="23%"/></td>
+    <td><img src="screenshots/home.png" width="23%"/></td>
+  </tr>
+  <tr>
+    <td align="center">Login Screen</td>
+    <td align="center">Register Screen</td>
+    <td align="center">Forgot Password</td>
+    <td align="center">Home Screen</td>
+  </tr>
+</table>
+
+--- 
+
+## 📦 Installation & Setup
+
+1. **Clone the repository**
+```bash
+   git clone https://github.com/prothesbarai/email_auth_with_firebase.git
+```
+
+## 📜 License
+- This project is MIT Licensed. See the LICENSE file for details.
