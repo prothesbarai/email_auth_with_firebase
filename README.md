@@ -20,7 +20,7 @@ A simple **Email & Password Authentication** system for Flutter using **Firebase
 
 <table>
   <tr>
-    <td><img src="assets/images/img_1.png" width="24%"/></td>
+    <td><img src="assets/images/img_1.png" width="24%" height="200px"/></td>
     <td><img src="assets/images/img.png" width="24%"/></td>
     <td><img src="screenshots/forgot_password.png" width="23%"/></td>
     <td><img src="screenshots/home.png" width="23%"/></td>
