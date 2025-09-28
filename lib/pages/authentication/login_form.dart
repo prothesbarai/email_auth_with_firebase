@@ -1,4 +1,7 @@
+import 'package:emailauthwithfirebase/pages/authentication/forget_password.dart';
 import 'package:emailauthwithfirebase/pages/authentication/registration_from.dart';
+import 'package:emailauthwithfirebase/pages/home_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LoginForm extends StatefulWidget {
@@ -28,6 +31,12 @@ class _LoginFormState extends State<LoginForm> {
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
+  }
+
+
+  /// >>> Navigate Login Page
+  void _navigateHomePage(){
+    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => HomePage()), (Route<dynamic> route) => false,);
   }
 
   @override
@@ -166,6 +175,17 @@ class _LoginFormState extends State<LoginForm> {
                                   String password = passwordController.text.trim();
                                   try{
                                     setState(() {isLoading = true;});
+
+                                    UserCredential credential = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
+
+                                    String uid = credential.user!.uid;
+
+                                    if(uid.isNotEmpty){
+                                      _navigateHomePage();
+                                    }
+
+
+                                    setState(() {isLoading = false;});
                                   }catch(err){
                                     debugPrint("Firebase Error $err");
                                   }
@@ -181,6 +201,14 @@ class _LoginFormState extends State<LoginForm> {
                           InkWell(
                             onTap:()=>Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => RegistrationForm()), (Route<dynamic> route) => false,),
                             child: Text("New User? Click Here",style: TextStyle(color: Colors.blue),),
+                          ),
+                          /// <<< =============== IF You New User So Registration Here =================
+
+                          /// >>> =============== IF You New User So Registration Here =================
+                          SizedBox(height: 25,),
+                          InkWell(
+                            onTap:()=>Navigator.push(context, MaterialPageRoute(builder: (context) => ForgetPassword(),)),
+                            child: Text("Forget Password",style: TextStyle(color: Colors.blue),),
                           )
                           /// <<< =============== IF You New User So Registration Here =================
                         ],

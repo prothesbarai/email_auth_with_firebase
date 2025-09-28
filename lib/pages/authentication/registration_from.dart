@@ -1,5 +1,7 @@
 import 'package:emailauthwithfirebase/pages/authentication/login_form.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class RegistrationForm extends StatefulWidget {
   const RegistrationForm({super.key});
@@ -12,6 +14,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
 
   bool isLoading = false;
 
+  final nameController = TextEditingController();
   final phnNumberController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -22,10 +25,12 @@ class _RegistrationFormState extends State<RegistrationForm> {
 
 
   /// >>> Helper Text & Icon Here
+  Icon nameIcon = Icon(Icons.person,color: Colors.grey, size: 15,);
   Icon phoneIcon = Icon(Icons.phone,color: Colors.grey, size: 15,);
   Icon emailIcon = Icon(Icons.email,color: Colors.grey, size: 15,);
   Icon passIcon = Icon(Icons.password,color: Colors.grey, size: 15,);
   Icon conPassIcon = Icon(Icons.password,color: Colors.grey, size: 15,);
+  String nameHelperText = "Your Full Name";
   String phoneHelperText = "Example : 01317818826";
   String emailHelperText = "Example : prothes19@gmail.com";
   String passHelperText = "At least 8 chars, Example : Prothes@123";
@@ -34,12 +39,20 @@ class _RegistrationFormState extends State<RegistrationForm> {
 
   @override
   void dispose() {
+    nameController.dispose();
     phnNumberController.dispose();
     emailController.dispose();
     passwordController.dispose();
     confirmPasswordController.dispose();
     super.dispose();
   }
+
+
+  /// >>> Navigate Login Page
+  void _navigateLoginPage(){
+    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginForm()), (Route<dynamic> route) => false,);
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +73,50 @@ class _RegistrationFormState extends State<RegistrationForm> {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
+
+                          /// >>> User Name Field Start Here ================
+                          TextFormField(
+                            decoration: InputDecoration(
+                              hintText: "Full Name",
+                              hintStyle: TextStyle(color: Colors.blue),
+                              labelText: "Full Name",
+                              labelStyle: TextStyle(color: Colors.grey),
+                              floatingLabelStyle: TextStyle(color: Colors.blue),
+                              border: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
+                              focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+                              helper: Row(children: [nameIcon, SizedBox(width: 5,), Text(nameHelperText,style: TextStyle(color : Colors.grey),)],),
+                            ),
+                            keyboardType: TextInputType.text,
+                            maxLength: 30,
+                            cursorColor: Colors.blue,
+                            controller: nameController,
+                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                            inputFormatters: [FilteringTextInputFormatter.deny(RegExp(r'[0-9]')),],
+                            onChanged: (value){
+                              setState(() {
+                                if (RegExp(r'^[a-zA-Z\s.)(]+$').hasMatch(value)){
+                                  nameHelperText = "Valid Name";
+                                  nameIcon = Icon(Icons.verified,color: Colors.green, size: 15,);
+                                }else{
+                                  nameHelperText = "";
+                                }
+                              });
+                            },
+                            validator: (value){
+                              if(value == null || value.trim().isEmpty){
+                                return "Field is Empty";
+                              }
+
+                              if (!RegExp(r'^[a-zA-Z\s.)(]+$').hasMatch(value)){
+                                return "Ignore Some Special Symbol";
+                              }
+                              return null;
+                            },
+                          ),
+                          SizedBox(height: 20,),
+                          /// <<< User Name Field End Here ==================
+
+
                           /// >>> Phone Number Field Start Here ================
                           TextFormField(
                             decoration: InputDecoration(
@@ -265,11 +322,32 @@ class _RegistrationFormState extends State<RegistrationForm> {
                               onPressed: isLoading? null :() async{
                                 FocusScope.of(context).unfocus();
                                 if(_formKey.currentState!.validate()){
+                                  String name = nameController.text.trim();
                                   String phnNumber = phnNumberController.text.trim();
                                   String email = emailController.text.trim();
                                   String password = confirmPasswordController.text.trim();
                                   try{
                                     setState(() {isLoading = true;});
+                                    /// >>> Step 1: Register User in Firebase Auth
+                                    UserCredential credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
+                                    /// >>> Step 2: Get user UID For Saved Extra Data And Navigate
+                                    String uid = credential.user!.uid;
+
+
+
+                                    /*await FirebaseFirestore.instance.collection("users").doc(uid).set({
+                                      "name": name,
+                                      "phone": phnNumber,
+                                      "email": email,
+                                      "createdAt": FieldValue.serverTimestamp(),
+                                    });*/
+
+                                    setState(() {isLoading = false;});
+
+
+                                    if(uid.isNotEmpty){
+                                      _navigateLoginPage();
+                                    }
                                   }catch(err){
                                     debugPrint("Firebase Error $err");
                                   }
@@ -284,16 +362,20 @@ class _RegistrationFormState extends State<RegistrationForm> {
                           /// >>> =============== IF Already His / Her Account Exists so Login Here =================
                           SizedBox(height: 25,),
                           InkWell(
-                            onTap:()=>Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginForm()), (Route<dynamic> route) => false,),
+                            onTap:()=>_navigateLoginPage(),
                             child: Text("Already have an account ? Click Here",style: TextStyle(color: Colors.blue),),
-                          )
+                          ),
                           /// <<< =============== IF Already His / Her Account Exists so Login Here =================
+
+                          SizedBox(height: 100,),
                         ],
                       )
                   ),
                 ),
               ),
             ),
+
+
 
             if (isLoading)
               Positioned(
