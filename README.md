@@ -18,12 +18,12 @@ A simple **Email & Password Authentication** system for Flutter using **Firebase
 
 ## 📸 Screenshots
 
-<table height="350px">
+<table>
   <tr>
-    <td><img src="assets/images/img_1.png" width="25%"/></td>
-    <td><img src="assets/images/img.png" width="25%"/></td>
-    <td><img src="assets/images/img_1.png" width="25%"/></td>
-    <td><img src="assets/images/img.png" width="25%"/></td>
+    <td><img src="assets/images/img_1.png" width="23%" height="200px"/></td>
+    <td><img src="assets/images/img.png" width="23%" height="200px"/></td>
+    <td><img src="assets/images/img_1.png" width="23%" height="200px"/></td>
+    <td><img src="assets/images/img.png" width="23%" height="200px"/></td>
   </tr>
   <tr>
     <td align="center">Login Screen</td>
@@ -32,6 +32,7 @@ A simple **Email & Password Authentication** system for Flutter using **Firebase
     <td align="center">Home Screen</td>
   </tr>
 </table>
+
 
 --- 
 
