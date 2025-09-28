@@ -1,4 +1,4 @@
-import 'package:emailauthwithfirebase/pages/home_page.dart';
+import 'package:emailauthwithfirebase/pages/authentication/registration_from.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -16,9 +16,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: false,
-        appBarTheme: AppBarThemeData(backgroundColor: Colors.blue,centerTitle: true, iconTheme: IconThemeData(color: Colors.blue,),foregroundColor: Colors.white)
+        appBarTheme: AppBarThemeData(backgroundColor: Colors.blue,centerTitle: true, iconTheme: IconThemeData(color: Colors.white,),foregroundColor: Colors.white)
       ),
-      home: HomePage()
+      home: RegistrationForm()
     );
   }
 }
