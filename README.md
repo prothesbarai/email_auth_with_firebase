@@ -19,10 +19,10 @@ A simple **Email & Password Authentication** system for Flutter using **Firebase
 ## 📸 Screenshots
 
 <p align="center">
-  <img src="assets/images/img_1.png" width="25%" style="margin-right:1%;"/>
-  <img src="assets/images/img.png" width="25%" style="margin-right:1%;"/>
-  <img src="assets/images/img_1.png" width="25%" style="margin-right:1%;"/>
-  <img src="assets/images/img.png" width="25%"/>
+  <img src="assets/images/img_1.png" width="24%" style="margin-right:1%;"/>
+  <img src="assets/images/img.png" width="24%" style="margin-right:1%;"/>
+  <img src="assets/images/img_1.png" width="24%" style="margin-right:1%;"/>
+  <img src="assets/images/img.png" width="24%"/>
 </p>
 
 <p align="center">
