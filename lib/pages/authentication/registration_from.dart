@@ -337,12 +337,8 @@ class _RegistrationFormState extends State<RegistrationForm> {
 
 
 
-                                    await FirebaseFirestore.instance.collection("users").doc(uid).set({
-                                      "name": name,
-                                      "phone": phnNumber,
-                                      "email": email,
-                                      "createdAt": FieldValue.serverTimestamp(),
-                                    });
+                                    await FirebaseFirestore.instance.collection("users").doc(uid).set({"name": name, "phone": phnNumber, "email": email, "createdAt": FieldValue.serverTimestamp(),});
+                                    
 
                                     setState(() {isLoading = false;});
 
