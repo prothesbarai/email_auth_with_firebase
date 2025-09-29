@@ -234,7 +234,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                             autovalidateMode: AutovalidateMode.onUserInteraction,
                             onChanged: (value){
                               setState(() {
-                                if (value.length > 8 && RegExp(r'^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*{}()\\.+=?/_-]).{8,}$').hasMatch(value)){
+                                if (value.length >= 8 && RegExp(r'^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*{}()\\.+=?/_-]).{8,}$').hasMatch(value)){
                                   passHelperText = "Valid Password";
                                   passIcon = Icon(Icons.verified,color: Colors.green, size: 15,);
                                 }else{
