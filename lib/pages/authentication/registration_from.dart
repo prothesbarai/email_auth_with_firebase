@@ -14,7 +14,7 @@ class RegistrationForm extends StatefulWidget {
 class _RegistrationFormState extends State<RegistrationForm> {
 
   bool isLoading = false;
-
+  String? emailError;
   final nameController = TextEditingController();
   final phnNumberController = TextEditingController();
   final emailController = TextEditingController();
@@ -177,6 +177,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                               floatingLabelStyle: TextStyle(color: Colors.blue),
                               border: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
                               focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+                              errorText: emailError,
                               helper: Row(children: [emailIcon, SizedBox(width: 5,), Text(emailHelperText,style: TextStyle(color : Colors.grey),)],),
                             ),
                             keyboardType: TextInputType.emailAddress,
@@ -349,8 +350,15 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                     if(uid.isNotEmpty){
                                       _navigateLoginPage();
                                     }
-                                  }catch(err){
-                                    debugPrint("Firebase Error $err");
+                                  }on FirebaseAuthException catch(err){
+                                    setState(() { isLoading = false; });
+
+                                    if (err.code == 'email-already-in-use') {
+                                      setState(() {emailError = "This email is already registered.";});
+                                      _formKey.currentState!.validate();
+                                    } else {
+                                      debugPrint("Error: ${err.message}");
+                                    }
                                   }
                                 }
                               },
