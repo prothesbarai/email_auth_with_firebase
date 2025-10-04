@@ -32,8 +32,6 @@ class HomePage extends StatelessWidget {
             Timestamp ts = userData['createdAt'];
             DateTime dateTime = ts.toDate();
 
-
-
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
