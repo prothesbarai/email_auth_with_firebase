@@ -123,7 +123,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                                   }
                                 }
                               },
-                              child: isLoading?Text("Wait.."):Text("Login")
+                              child: isLoading?Text("Wait.."):Text("Reset Password")
                           ),
                           /// <<< Registration Button End Here =================
 
